@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'ub-app',
   templateUrl: './app.component.html',
-  styleUrls: ['../styles/app.component.scss']
+  styleUrls: []
 })
 export class AppComponent implements OnInit {
 
@@ -11,5 +11,4 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
