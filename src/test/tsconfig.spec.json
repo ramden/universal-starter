@@ -12,27 +12,14 @@
         "suppressImplicitAnyIndexErrors": true,
         "outDir": "target/www/app",
         "lib": ["es7", "dom"],
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "types": [
-            "jest"
-        ],
+        "typeRoots": ["node_modules/@types"],
+        "types": ["jest"],
         "baseUrl": "./",
         "paths": {
-            "@angular/*": [
-                "./node_modules/@angular/*"
-            ],
-            "@app/*": [
-                "src/main/webapp/app/*"
-            ]
+            "@angular/*": ["./node_modules/@angular/*"],
+            "@app/*": ["src/main/webapp/app/*"]
         }
     },
-    "include": [
-        "src/main/webapp/app",
-        "src/test/javascript/"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+    "include": ["."],
+    "exclude": ["node_modules"]
 }

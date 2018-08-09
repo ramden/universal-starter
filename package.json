@@ -1,60 +1,105 @@
 {
-  "name": "universal-starter",
-  "version": "0.0.0",
-  "lint-staged": {
-    "src/**/*.{ts,css,scss}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "jest --coverage --config ./src/test/jest.conf.js",
-    "lint": "ng lint",
-    "e2e": "cypress run",
-    "prettier:preview": "yarn prettier \"**/*.{ts,js,css,scss}\"",
-    "prettier:write": "yarn prettier --write \"**/*.{ts,js,css,scss}\"",
-    "cypress:open": "cypress open"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^6.1.0",
-    "@angular/common": "^6.1.0",
-    "@angular/compiler": "^6.1.0",
-    "@angular/core": "^6.1.0",
-    "@angular/forms": "^6.1.0",
-    "@angular/http": "^6.1.0",
-    "@angular/platform-browser": "^6.1.0",
-    "@angular/platform-browser-dynamic": "^6.1.0",
-    "@angular/router": "^6.1.0",
-    "core-js": "^2.5.4",
-    "rxjs": "^6.0.0",
-    "zone.js": "~0.8.26"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "~0.7.0",
-    "@angular/cli": "~6.1.2",
-    "@angular/compiler-cli": "^6.1.0",
-    "@angular/language-service": "^6.1.0",
-    "@types/jest": "^23.3.1",
-    "@types/node": "^10.5.7",
-    "codelyzer": "~4.2.1",
-    "cypress": "^3.0.3",
-    "jest": "^23.4.2",
-    "jest-junit": "^5.1.0",
-    "jest-preset-angular": "^6.0.0",
-    "jest-sonar-reporter": "^2.0.0",
-    "lint-staged": "^7.2.0",
-    "prettier": "^1.14.2",
-    "ts-node": "~5.0.1",
-    "tslint": "~5.9.1",
-    "tslint-config-prettier": "^1.14.0",
-    "typescript": "~2.7.2"
-  },
-  "jestSonar": {
-    "reportPath": "dist/test-results/jest",
-    "reportFile": "TESTS-results-sonar.xml"
-  }
+    "name": "universal-starter",
+    "author": "Denis Ramic",
+    "version": "0.0.1-alpha",
+    "private": true,
+    "cacheDirectories": [
+        "node_modules"
+    ],
+    "dependencies": {
+        "@angular/animations": "^6.1.0",
+        "@angular/common": "^6.1.0",
+        "@angular/compiler": "^6.1.0",
+        "@angular/core": "^6.1.0",
+        "@angular/forms": "^6.1.0",
+        "@angular/http": "^6.1.0",
+        "@angular/platform-browser": "^6.1.0",
+        "@angular/platform-browser-dynamic": "^6.1.0",
+        "@angular/router": "^6.1.0",
+        "@ngrx/effects": "^6.1.0",
+        "@ngrx/entity": "^6.1.0",
+        "@ngrx/store": "^6.1.0",
+        "@ngrx/store-devtools": "^6.1.0",
+        "core-js": "^2.5.4",
+        "rxjs": "^6.0.0",
+        "zone.js": "~0.8.26"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "~0.7.0",
+        "@angular/cli": "~6.1.2",
+        "@angular/compiler-cli": "^6.1.0",
+        "@angular/language-service": "^6.1.0",
+        "@types/jest": "^23.3.1",
+        "@types/node": "^10.5.7",
+        "codelyzer": "~4.2.1",
+        "cypress": "^3.0.3",
+        "jest": "^23.4.2",
+        "jest-junit": "^5.1.0",
+        "jest-preset-angular": "^6.0.0",
+        "jest-sonar-reporter": "^2.0.0",
+        "lint-staged": "^7.2.0",
+        "prettier": "^1.14.2",
+        "ts-node": "~5.0.1",
+        "tslint": "~5.9.1",
+        "tslint-config-prettier": "^1.14.0",
+        "typescript": "~2.7.2"
+    },
+    "lint-staged": {
+        "src/**/*.{ts,css,scss}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build",
+        "test": "jest --coverage --collectCoverageFrom=src/app/**/*.ts --collectCoverageFrom=!src/app/**/*.module.ts",
+        "test:watch": "yarn test --watch",
+        "lint": "ng lint",
+        "e2e": "cypress run",
+        "prettier:preview": "yarn prettier \"**/*.{ts,js,css,scss}\"",
+        "prettier:write": "yarn prettier --write \"**/*.{ts,js,css,scss}\"",
+        "cypress:open": "cypress open"
+    },
+    "jest": {
+        "preset": "jest-preset-angular",
+        "setupTestFrameworkScriptFile": "./src/test/jest.ts",
+        "coverageDirectory": "<rootDir>/dist/test-results/",
+        "globals": {
+            "ts-jest": {
+                "tsConfigFile": "./src/test/tsconfig.spec.json"
+            },
+            "__TRANSFORM_HTML__": true
+        },
+        "moduleNameMapper": {
+            "@app/(.*)": "<rootDir>/app/$1"
+        },
+        "reporters": [
+            "default",
+            [
+                "jest-junit",
+                {
+                    "output": "./dist/test-results/jest/TESTS-results.xml"
+                }
+            ]
+        ],
+        "testResultsProcessor": "jest-sonar-reporter",
+        "transform": {
+            "^.+\\.js$": "babel-jest"
+        },
+        "transformIgnorePatterns": [
+            "node_modules/(?!@angular/common/locales|ng-snotify)"
+        ],
+        "testMatch": [
+            "<rootDir>/src/test/**/+(*.)+(spec|test).+(ts|js)?(x)"
+        ],
+        "rootDir": ".",
+        "testEnvironment": "jsdom",
+        "testURL": "http://localhost/"
+    },
+    "jestSonar": {
+        "reportPath": "dist/test-results/jest",
+        "reportFile": "TESTS-results-sonar.xml"
+    }
 }
