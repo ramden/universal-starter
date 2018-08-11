@@ -48,7 +48,11 @@ context('Assertions', () => {
                     expect(paragraphs).to.have.length(3);
 
                     // set this specific subject
-                    expect(paragraphs).to.deep.eq(['Some text from first p', 'More text from second p', 'And even more text from third p']);
+                    expect(paragraphs).to.deep.eq([
+                        'Some text from first p',
+                        'More text from second p',
+                        'And even more text from third p'
+                    ]);
                 });
         });
 

@@ -32,20 +32,22 @@ context('Utilities', () => {
         cy.get('.utility-blob').then(($div) =>
             // https://github.com/nolanlawson/blob-util#imgSrcToDataURL
             // get the dataUrl string for the javascript-logo
-            Cypress.Blob.imgSrcToDataURL('https://example.cypress.io/assets/img/javascript-logo.png', undefined, 'anonymous').then(
-                (dataUrl) => {
-                    // create an <img> element and set its src to the dataUrl
-                    let img = Cypress.$('<img />', {src: dataUrl});
-                    // need to explicitly return cy here since we are initially returning
-                    // the Cypress.Blob.imgSrcToDataURL promise to our test
-                    // append the image
-                    $div.append(img);
+            Cypress.Blob.imgSrcToDataURL(
+                'https://example.cypress.io/assets/img/javascript-logo.png',
+                undefined,
+                'anonymous'
+            ).then((dataUrl) => {
+                // create an <img> element and set its src to the dataUrl
+                let img = Cypress.$('<img />', {src: dataUrl});
+                // need to explicitly return cy here since we are initially returning
+                // the Cypress.Blob.imgSrcToDataURL promise to our test
+                // append the image
+                $div.append(img);
 
-                    cy.get('.utility-blob img')
-                        .click()
-                        .should('have.attr', 'src', dataUrl);
-                }
-            )
+                cy.get('.utility-blob img')
+                    .click()
+                    .should('have.attr', 'src', dataUrl);
+            })
         );
     });
 
