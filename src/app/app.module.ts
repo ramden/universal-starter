@@ -5,18 +5,18 @@ import {AppComponent} from './app.component';
 import {RootStoreModule} from './root-store';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
-import {AuthModule} from './auth/auth.module';
-import {AppRoutingModule} from './app-routing/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         RootStoreModule,
         CoreModule,
         SharedModule,
         RootStoreModule,
-        AuthModule,
         AppRoutingModule
     ],
     providers: [],

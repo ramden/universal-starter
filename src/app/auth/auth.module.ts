@@ -4,9 +4,32 @@ import {LoginContainerComponent} from './containers/login-container/login-contai
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {SharedModule} from '../shared/shared.module';
+import {RegisterContainerComponent} from './containers/register-container/register-container.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+    {
+        path: 'register',
+        component: RegisterContainerComponent
+    },
+    {
+        path: 'login',
+        component: LoginContainerComponent
+    },
+    {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    }
+];
 
 @NgModule({
-    imports: [CommonModule, SharedModule],
-    declarations: [LoginComponent, LoginContainerComponent, RegisterComponent]
+    imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+    declarations: [
+        LoginComponent,
+        LoginContainerComponent,
+        RegisterComponent,
+        RegisterContainerComponent
+    ]
 })
 export class AuthModule {}

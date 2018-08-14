@@ -3,23 +3,28 @@
         <div class="container">
             <header class="has-text-centered">
                 <div class="columns">
-                    <div class="column is-3 is-offset-3">
+                    <div class="column is-3 is-offset-3"
+                         id="introArea">
                         <h4 class="fa-7x fas fa-code has-text-primary"></h4>
                         <br>
                         <br>
-                        <h3 class="title is-3">
+                        <h3 class="title is-3"
+                            id="introTitle">
                             Some intro text
                         </h3>
-                        <h4 class="subtitle is-4">
+                        <h4 class="subtitle is-4"
+                            id="introSubtitle">
                             Intro subtext
                         </h4>
                     </div>
                     <div class="column is-3">
                         <br>
-                        <form [formGroup]="loginForm">
+                        <form [formGroup]="form">
                             <div class="field">
                                 <p class="control has-icons-left has-icons-right">
                                     <input class="input"
+                                           id="usernameInput"
+                                           data-cy="email"
                                            type="email"
                                            [class.is-danger]="username.touched && username.dirty && username.invalid"
                                            [class.is-success]="username.touched && username.dirty && username.valid"
@@ -31,17 +36,30 @@
                                       <i class="fas fa-envelope"></i>
                                     </span>
                                     <span *ngIf="username.touched && username.dirty"
+                                          id="usernameStateIcon"
+                                          data-cy="usernameStateIcon"
                                           class="icon is-small is-right">
-                                        <i *ngIf="username.invalid" class="fas fa-exclamation-triangle"></i>
-                                        <i *ngIf="username.valid" class="fas fa-check"></i>
+                                        <i *ngIf="username.invalid"
+                                           id="usernameStateErrorIcon"
+                                           data-cy="usernameStateErrorIcon"
+                                           class="fas fa-exclamation-triangle"></i>
+                                        <i *ngIf="username.valid"
+                                           class="fas fa-check"
+                                           id="usernameStateSuccessIcon"
+                                           data-cy="usernameStateSuccessIcon"
+                                        ></i>
                                     </span>
                                 </p>
                                 <ng-container *ngIf="username.invalid && username.dirty && username.touched">
-                                    <p *ngIf="username.errors.email"
+                                    <p *ngIf="!!username.errors.email"
+                                       data-cy="validationMessageEmailInvalid"
+                                       id="validationMessageEmailInvalid"
                                        class="help is-danger has-text-left">
                                         This email is invalid
                                     </p>
-                                    <p *ngIf="username.errors.required"
+                                    <p *ngIf="!!username.errors.required"
+                                       id="validatioMessageEmailRequired"
+                                       data-cy="validatioMessageEmailRequired"
                                        class="help is-danger has-text-left">
                                         This field is required
                                     </p>
@@ -50,6 +68,8 @@
                             <div class="field">
                                 <p class="control has-icons-left has-icons-right">
                                     <input class="input"
+                                           data-cy="password"
+                                           id="passwordInput"
                                            formControlName="password"
                                            type="password"
                                            name="password"
@@ -60,17 +80,28 @@
                                       <i class="fas fa-lock"></i>
                                     </span>
                                     <span *ngIf="password.touched && password.dirty"
+                                          id="passwordStateIcon"
+                                          data-cy="passwordStateIcon"
                                           class="icon is-small is-right">
-                                        <i *ngIf="password.invalid" class="fas fa-exclamation-triangle"></i>
-                                        <i *ngIf="password.valid" class="fas fa-check"></i>
+                                        <i *ngIf="password.invalid"
+                                           id="passwordStateIconPasswordInvalid"
+                                           data-cy="passwordStateIconPasswordInvalid"
+                                           class="fas fa-exclamation-triangle"></i>
+                                        <i *ngIf="password.valid"
+                                           id="passwordStateIconPasswordValid"
+                                           class="fas fa-check"></i>
                                     </span>
                                 </p>
                                 <ng-container *ngIf="password.invalid && password.dirty && password.touched">
-                                    <p *ngIf="password.errors.minlength"
+                                    <p *ngIf="!!password.errors.minlength"
+                                       id="validationMessagePasswordTooShort"
+                                       data-cy="validationMessagePasswordTooShort"
                                        class="help is-danger has-text-left">
                                         Please enter min. 8 characters
                                     </p>
-                                    <p *ngIf="password.errors.required"
+                                    <p *ngIf="!!password.errors.required"
+                                       id="validationMessagePasswordRequired"
+                                       data-cy="validationMessagePasswordRequired"
                                        class="help is-danger has-text-left">
                                         This field is required
                                     </p>
@@ -81,25 +112,39 @@
                                     <div class="column has-text-left">
                                         <p class="help">
                                             <label class="checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox"
+                                                       id="rememberMeCheckbox"
+                                                       data-cy="rememberMeCheckbox">
                                                 Remember me
                                             </label>
                                         </p>
                                     </div>
                                     <div class="column has-text-right">
                                         <p class="help">
-                                            <a href="#">I forgot my password</a>
+                                            <a href="#"
+                                               id="forgotPasswordLink"
+                                               data-cy="forgotPasswordLink">I forgot my
+                                                                            password</a>
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <button [disabled]="loginForm.invalid" class="button is-fullwidth is-primary">Login</button>
+                            <button [disabled]="form.invalid"
+                                    class="button is-fullwidth is-primary"
+                                    id="loginButton"
+                                    data-cy="loginButton">Login
+                            </button>
                         </form>
-                        <section id="socialLogin" *ngIf="1 == 2">
-                            <div class="is-divider" data-content="OR"></div>
+                        <section id="socialLogin"
+                                 data-cy="socialLogin"
+                                 *ngIf="!!socialLoginEnabled">
+                            <div class="is-divider"
+                                 data-content="OR"></div>
                             <div class="field">
-                                <button class="button is-danger is-fullwidth">
+                                <button class="button is-danger is-fullwidth"
+                                        id="loginWithGoogleButton"
+                                        data-cy="loginWithGoogleButton">
                                 <span class="icon">
                                     <i class="fab fa-google"></i>
                                 </span>
@@ -107,7 +152,9 @@
                                 </button>
                             </div>
                             <div class="field">
-                                <button class="button is-info is-fullwidth">
+                                <button id="loginWithFacebookButton"
+                                        data-cy="loginWithFacebookButton"
+                                        class="button is-info is-fullwidth">
                                 <span class="icon">
                                     <i class="fab fa-facebook-f"></i>
                                 </span>
@@ -121,12 +168,16 @@
                     <div class="is-divider"></div>
                     <p>Don't have an account yet?</p>
                     <br>
-                    <button class="button">Register</button>
+                    <a class="button"
+                       id="registerLink"
+                       data-cy="registerLink"
+                       [routerLink]="['/register']">Register</a>
                 </div>
             </header>
         </div>
     </div>
-    <div class="hero-foot">
+    <div class="hero-foot"
+         id="footer">
         <div class="container">
             <div class="tabs is-centered">
                 <ul>

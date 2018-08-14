@@ -1,3 +1,126 @@
-<p>
-  register works!
-</p>
+<section class="section hero is-fullheight is-white">
+    <div class="hero-body">
+        <div class="container">
+            <header class="has-text-centered">
+                <div class="columns">
+                    <div class="column is-3 is-offset-3">
+                        <h4 class="fa-7x fas fa-code has-text-primary"></h4>
+                        <br>
+                        <br>
+                        <h3 class="title is-3">
+                            Some intro text
+                        </h3>
+                        <h4 class="subtitle is-4">
+                            Intro subtext
+                        </h4>
+                    </div>
+                    <div class="column is-3">
+                        <br>
+                        <form [formGroup]="form">
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input"
+                                           type="email"
+                                           [class.is-danger]="username.touched && username.dirty && username.invalid"
+                                           [class.is-success]="username.touched && username.dirty && username.valid"
+                                           #emailInput
+                                           placeholder="Email address"
+                                           formControlName="username"
+                                           name="username">
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span *ngIf="username.touched && username.dirty"
+                                          class="icon is-small is-right">
+                                        <i *ngIf="username.invalid"
+                                           class="fas fa-exclamation-triangle"></i>
+                                        <i *ngIf="username.valid"
+                                           class="fas fa-check"></i>
+                                    </span>
+                                </p>
+                                <ng-container *ngIf="username.invalid && username.dirty && username.touched">
+                                    <p *ngIf="!!username.errors.email"
+                                       class="help is-danger has-text-left">
+                                        This email is invalid
+                                    </p>
+                                    <p *ngIf="!!username.errors.required"
+                                       class="help is-danger has-text-left">
+                                        This field is required
+                                    </p>
+                                </ng-container>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input"
+                                           formControlName="password"
+                                           type="password"
+                                           name="password"
+                                           [class.is-danger]="password.touched && password.dirty && password.invalid"
+                                           [class.is-success]="password.touched && password.dirty && password.valid"
+                                           placeholder="Password">
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-lock"></i>
+                                    </span>
+                                    <span *ngIf="password.touched && password.dirty"
+                                          class="icon is-small is-right">
+                                        <i *ngIf="password.invalid"
+                                           class="fas fa-exclamation-triangle"></i>
+                                        <i *ngIf="password.valid"
+                                           class="fas fa-check"></i>
+                                    </span>
+                                </p>
+                                <ng-container *ngIf="password.invalid && password.dirty && password.touched">
+                                    <p *ngIf="!!password.errors.minlength"
+                                       class="help is-danger has-text-left">
+                                        Please enter min. 8 characters
+                                    </p>
+                                    <p *ngIf="!!password.errors.required"
+                                       class="help is-danger has-text-left">
+                                        This field is required
+                                    </p>
+                                </ng-container>
+                            </div>
+                            <div class="field">
+                                <div class="columns">
+                                    <div class="column has-text-left">
+                                        <p class="help">
+                                            <label class="checkbox">
+                                                <input type="checkbox">
+                                                Remember me
+                                            </label>
+                                        </p>
+                                    </div>
+                                    <div class="column has-text-right">
+                                        <p class="help">
+                                            <a href="#">I forgot my password</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button [disabled]="form.invalid"
+                                    class="button is-fullwidth is-success">Register
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="column is-6 is-offset-3">
+                    <div class="is-divider"></div>
+                    <p>You have an account?</p>
+                    <br>
+                    <a class="button is-info"
+                       [routerLink]="['/login']">Login</a>
+                </div>
+            </header>
+        </div>
+    </div>
+    <div class="hero-foot">
+        <div class="container">
+            <div class="tabs is-centered">
+                <ul>
+                    <li><a>Footer link 1</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
