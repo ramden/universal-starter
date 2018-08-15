@@ -6,6 +6,8 @@ context('Login page', () => {
         cy.visit('login');
         cy.get('[data-cy=email]').as('email');
         cy.get('[data-cy=password]').as('password');
+        cy.get('[data-cy=loginButton]').as('loginButton');
+        cy.get('[data-cy=registerLink]').as('registerButton');
     });
 
     context('Username field', () => {
@@ -225,6 +227,75 @@ context('Login page', () => {
                     'visible'
                 );
             });
+        });
+    });
+
+    context('Login button', () => {
+        it('Should be disabled', () => {
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should stay disabled after entering only invalid email', () => {
+            cy.get('@email').type('invalid');
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should stay disabled after entering only valid email', () => {
+            cy.get('@email').type('validmail@valid.com');
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should stay disabled after entering only valid email and invalid password', () => {
+            cy.get('@email').type('validmail@valid.com');
+            cy.get('@password').type('sss');
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should stay disabled after entering only invalid password', () => {
+            cy.get('@password').type('pwd');
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should stay disabled after entering only valid password', () => {
+            cy.get('@password').type('validpassword');
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should stay disabled after entering only valid password and invalid email', () => {
+            cy.get('@email').type('invalid');
+            cy.get('@password').type('validpassword');
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should become enabled after entering valid password and valid email', () => {
+            cy.get('@email').type('valid@email.com');
+            cy.get('@password').type('validpassword');
+            cy.get('@loginButton').should('be.enabled');
+        });
+
+        it('Should become disabled after entering valid login data and clearing password', () => {
+            cy.get('@email').type('valid@email.com');
+            cy.get('@password').type('validpassword');
+            cy.get('@loginButton').should('be.enabled');
+            cy.get('@password').clear();
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should become disabled after entering valid login data and clearing email', () => {
+            cy.get('@email').type('valid@email.com');
+            cy.get('@password').type('validpassword');
+            cy.get('@loginButton').should('be.enabled');
+            cy.get('@email').clear();
+            cy.get('@loginButton').should('be.disabled');
+        });
+
+        it('Should become disabled after entering valid login data and clearing email and password', () => {
+            cy.get('@email').type('valid@email.com');
+            cy.get('@password').type('validpassword');
+            cy.get('@loginButton').should('be.enabled');
+            cy.get('@email').clear();
+            cy.get('@password').clear();
+            cy.get('@loginButton').should('be.disabled');
         });
     });
 });
